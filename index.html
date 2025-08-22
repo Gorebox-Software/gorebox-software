@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gorebox</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="navbar">
@@ -31,7 +31,7 @@
   </div>
 
   <div class="grid" id="games-grid">
-    <div class="card" onclick="window.location.href='grove/grove.html'">
+    <div class="card" onclick="window.location.href='grove.html'">
       <img src="https://img.itch.zone/aW1nLzIwNzYxNzMzLnBuZw==/315x250%23c/FCNscO.png" alt="Grove">
       <div class="card-content">
         <h3>Grove</h3>
@@ -53,11 +53,20 @@
 
     function generatePlaceholderCards() {
       const grid = document.getElementById('games-grid');
-      placeholders.forEach(p => {
+      placeholders.forEach((p, index) => {
         const card = document.createElement('div');
         card.className = 'card';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
         card.innerHTML = `<img src="${p.img}" alt="${p.title}" onerror="this.style.background='#2a2a2a';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.color='#666666';this.style.fontSize='14px';this.innerHTML='${p.title}'"><div class="card-content"><h3>${p.title}</h3><p>${p.desc}</p></div>`;
         grid.appendChild(card);
+        
+        // Staggered animation
+        setTimeout(() => {
+          card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, index * 150);
       });
     }
 
@@ -78,6 +87,10 @@
             cleanImg.style.border = 'none';
             visitsDisplay.innerHTML = '';
             visitsDisplay.appendChild(cleanImg);
+            
+            // Add success animation
+            visitsDisplay.style.animation = 'pulse 0.6s ease-in-out';
+            setTimeout(() => visitsDisplay.style.animation = '', 600);
             return true;
           }
         }
@@ -87,15 +100,123 @@
 
     function tryUpdateCounter(attempts = 0) {
       if (updateVisitsDisplay() || attempts >= 30) {
-        if (attempts >= 30) document.getElementById('visits-display').textContent = '0';
+        if (attempts >= 30) {
+          document.getElementById('visits-display').textContent = '0';
+          document.getElementById('visits-display').style.animation = 'pulse 0.6s ease-in-out';
+        }
         return;
       }
       setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
     }
 
+    // Add floating animation to navbar elements
+    function addFloatingEffects() {
+      const navbarHeader = document.querySelector('.navbar-header');
+      const socialLinks = document.querySelectorAll('.social-link');
+      
+      if (navbarHeader) {
+        navbarHeader.style.animation = 'float 3s ease-in-out infinite';
+      }
+      
+      if (socialLinks.length > 0) {
+        socialLinks.forEach((link, index) => {
+          link.style.animation = `float 3s ease-in-out infinite ${index * 0.2}s`;
+        });
+      }
+    }
+
+    // Add parallax effect to background
+    function addParallaxEffect() {
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('body::before');
+        if (parallax) {
+          const speed = scrolled * 0.5;
+          parallax.style.transform = `translateY(${speed}px)`;
+        }
+      });
+    }
+
+    // Add typing effect to title
+    function addTypingEffect() {
+      const title = document.querySelector('.navbar h1');
+      if (!title) return;
+      
+      const text = title.textContent;
+      title.textContent = '';
+      title.style.opacity = '1';
+      
+      let i = 0;
+      const typeWriter = () => {
+        if (i < text.length) {
+          title.textContent += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      };
+      
+      setTimeout(typeWriter, 1000);
+    }
+
+    // Add card hover effects
+    function addCardEffects() {
+      const cards = document.querySelectorAll('.card');
+      if (cards.length > 0) {
+        cards.forEach(card => {
+          card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-8px) scale(1.02)';
+          });
+          
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+          });
+        });
+      }
+    }
+
+    // Add loading animation
+    function addLoadingAnimation() {
+      const visitsDisplay = document.getElementById('visits-display');
+      if (!visitsDisplay) return;
+      
+      visitsDisplay.classList.add('loading');
+      
+      // Remove loading class when counter updates
+      const observer = new MutationObserver(() => {
+        if (visitsDisplay.querySelector('img')) {
+          visitsDisplay.classList.remove('loading');
+          observer.disconnect();
+        }
+      });
+      
+      observer.observe(visitsDisplay, { childList: true });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       generatePlaceholderCards();
       tryUpdateCounter();
+      
+      // Add entrance animation to navbar
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.style.opacity = '0';
+        navbar.style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+          navbar.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          navbar.style.opacity = '1';
+          navbar.style.transform = 'translateY(0)';
+        }, 100);
+      }
+      
+      // Add effects after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        addFloatingEffects();
+        addParallaxEffect();
+        addTypingEffect();
+        addCardEffects();
+        addLoadingAnimation();
+      }, 100);
     });
   </script>
 </body>

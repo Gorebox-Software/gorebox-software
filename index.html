@@ -122,10 +122,17 @@
 
   <!-- Counter Script -->
   <script>
-    fetch('https://api.countapi.xyz/hit/gorebox-site/visits')
+    // Unique counter ID for your site
+    const counterId = "gorebox-site";
+
+    fetch(`https://api.simplecounterapi.com/hit/${counterId}`)
       .then(res => res.json())
       .then(res => {
-        document.getElementById('counter').innerText = res.value;
+        document.getElementById("counter").innerText = res.value;
+      })
+      .catch(err => {
+        document.getElementById("counter").innerText = "Error";
+        console.error("Counter error:", err);
       });
   </script>
 </body>

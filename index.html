@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	 <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
+  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gorebox</title>
@@ -23,6 +23,19 @@
       padding: 10px 20px;
       background: #222;
       border-bottom: 2px solid #333;
+      position: relative;
+    }
+    .navbar-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+      padding: 5px;
+      border-radius: 4px;
+    }
+    .navbar-header:hover {
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.1);
     }
     .navbar img {
       height: 40px;
@@ -34,12 +47,41 @@
       color: #fff;
     }
 
+    /* Visits Counter - Top Right */
+    .visits-counter {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #333;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: #aaa;
+      border: 1px solid #444;
+      text-align: center;
+    }
+    
+    .visits-counter .counter-label {
+      display: block;
+      margin-bottom: 2px;
+    }
+    
+    /* Make counter images larger and visible */
+    .visits-counter img {
+      width: auto !important;
+      height: auto !important;
+      max-width: 100px;
+      max-height: 30px;
+      pointer-events: none;
+      cursor: default;
+    }
+
     /* Grid */
     .grid {
       flex: 1;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
       padding: 20px;
     }
     .card {
@@ -47,31 +89,42 @@
       border-radius: 12px;
       overflow: hidden;
       text-align: center;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      /* Make card square */
+      aspect-ratio: 1 / 1;
     }
     .card:hover {
-      transform: scale(1.05);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.7);
     }
     .card img {
       width: 100%;
-      height: 120px;
+      height: 75%;
       object-fit: cover;
       background: #333;
     }
-    .card p {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: #fff;
+    .card-content {
+      padding: 10px 8px;
+      height: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #1c1c1c;
     }
-
-    /* Counter */
-    .counter {
-      text-align: center;
-      padding: 10px;
-      background: #181818;
+    .card-content h3 {
+      margin: 4px 0;
       font-size: 1rem;
-      color: #aaa;
+    }
+    .card-content p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #ccc;
     }
 
     /* Footer Ad Banner */
@@ -87,46 +140,129 @@
 <body>
   <!-- Navbar -->
   <div class="navbar">
-    <img src="https://via.placeholder.com/40" alt="Logo">
-    <h1>Gorebox</h1>
+    <div class="navbar-header" onclick="window.location.href='index.html'">
+      <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
+      <h1>Gorebox</h1>
+    </div>
+    
+    <!-- Visits Counter - Top Right -->
+    <div class="visits-counter">
+      <span class="counter-label">Visits</span>
+      <span id="visits-display">Loading...</span>
+    </div>
   </div>
 
   <!-- Grid of Apps/Games -->
-  <div class="grid">
-<div class="card" onclick="window.location.href='grove.html'">
-  <img src="https://img.itch.zone/aW1nLzIwNzYxNzMzLnBuZw==/315x250%23c/FCNscO.png" alt="Grove">
-  <p>Grove</p>
-</div>
+  <div class="grid" id="games-grid">
 
-    <div class="card">
-      <img src="https://via.placeholder.com/150x120?text=The+Long+Game" alt="The Long Game">
-      <p>The Long Game</p>
+    <div class="card" onclick="window.location.href='grove.html'">
+      <img src="https://img.itch.zone/aW1nLzIwNzYxNzMzLnBuZw==/315x250%23c/FCNscO.png" alt="Grove">
+      <div class="card-content">
+        <h3>Grove</h3>
+        <p>Explore a mysterious world in this relaxing adventure game.</p>
+      </div>
     </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/150x120?text=Guitar+Metronome" alt="Guitar Metronome">
-      <p>Guitar Metronome</p>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/150x120?text=Coming+Soon" alt="Coming Soon">
-      <p>Coming Soon</p>
-    </div>
-  </div>
 
-  <!-- Visit Counter -->
-  <div class="counter">
-    <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d"></div>
-    <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
-    <br>
-    <noscript>
-      <a href="https://www.freecounterstat.com" title="hit counter">
-        <img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=l2qmnwy1hupkrysfakk8nhracsywsj8d" border="0" title="hit counter" alt="hit counter">
-      </a>
-    </noscript>
   </div>
 
   <!-- Footer Banner -->
   <div class="ad-banner">
     [ Banner Ad Placement ]
   </div>
+
+  <!-- Hidden Counter Script -->
+  <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d" style="display:none;"></div>
+  <script type="text/javascript" src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
+  <script>
+    // Generate placeholder cards
+    function generatePlaceholderCards() {
+      const grid = document.getElementById('games-grid');
+      const placeholders = [
+        {
+          title: "The Long Game",
+          description: "Challenge your strategy skills in this epic turn-based game.",
+          image: "https://static.itch.io/images/itchio-textless-black.svg"
+        },
+        {
+          title: "Guitar Metronome",
+          description: "Keep perfect time while practicing your guitar skills.",
+          image: "https://static.itch.io/images/itchio-textless-black.svg"
+        },
+        {
+          title: "Coming Soon",
+          description: "Stay tuned for more games and tools coming soon!",
+          image: "https://static.itch.io/images/itchio-textless-black.svg"
+        }
+      ];
+
+      placeholders.forEach(placeholder => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${placeholder.image}" alt="${placeholder.title}" onerror="this.style.background='#2a2a2a'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='#666666'; this.style.fontSize='14px'; this.innerHTML='${placeholder.title}'">
+          <div class="card-content">
+            <h3>${placeholder.title}</h3>
+            <p>${placeholder.description}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Update visits display when counter loads
+    function updateVisitsDisplay() {
+      const counterElement = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
+      const visitsDisplay = document.getElementById('visits-display');
+      
+      if (counterElement && counterElement.innerHTML && counterElement.innerHTML.trim() !== '') {
+        // Extract only the main counter image, remove links and tracking pixels
+        const counterHTML = counterElement.innerHTML;
+        const imgMatch = counterHTML.match(/<img[^>]*src="[^"]*counter\.php[^"]*"[^>]*>/);
+        
+        if (imgMatch) {
+          // Create a clean image element with just the counter
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = imgMatch[0];
+          const img = tempDiv.querySelector('img');
+          
+          if (img) {
+            // Create a new clean image without any links or tracking
+            const cleanImg = document.createElement('img');
+            cleanImg.src = img.src;
+            cleanImg.alt = 'Visit Counter';
+            cleanImg.style.border = 'none';
+            
+            visitsDisplay.innerHTML = '';
+            visitsDisplay.appendChild(cleanImg);
+            console.log('Counter updated with clean image');
+            return true;
+          }
+        }
+      }
+      return false; // Not ready yet
+    }
+
+    // Try to update immediately, then retry every second
+    let attempts = 0;
+    const maxAttempts = 30; // Try for 30 seconds
+    
+    function tryUpdateCounter() {
+      if (updateVisitsDisplay() || attempts >= maxAttempts) {
+        if (attempts >= maxAttempts) {
+          document.getElementById('visits-display').textContent = '0';
+        }
+        return;
+      }
+      
+      attempts++;
+      setTimeout(tryUpdateCounter, 1000);
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      generatePlaceholderCards();
+      tryUpdateCounter();
+    });
+  </script>
 </body>
 </html>

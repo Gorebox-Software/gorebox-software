@@ -4,13 +4,13 @@
   <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gorebox</title>
+  <title>Grove - Gorebox</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
   <div class="navbar">
-    <div class="navbar-header" onclick="window.location.href='index.html'">
+    <div class="navbar-header" onclick="window.location.href='../index.html'">
       <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
       <h1>Gorebox</h1>
     </div>
@@ -30,13 +30,11 @@
     </div>
   </div>
 
-  <div class="grid" id="games-grid">
-    <div class="card" onclick="window.location.href='grove/grove.html'">
-      <img src="https://img.itch.zone/aW1nLzIwNzYxNzMzLnBuZw==/315x250%23c/FCNscO.png" alt="Grove">
-      <div class="card-content">
-        <h3>Grove</h3>
-        <p>Grove is a free sandbox MMO</p>
-      </div>
+  <div class="content">
+    <h2>Grove</h2>
+    <p>Grove is a free sandbox MMO</p>
+    <div class="game-container">
+      <iframe class="game-iframe" frameborder="0" src="https://itch.io/embed-upload/12968171?color=000000" allowfullscreen=""></iframe>
     </div>
   </div>
 
@@ -45,22 +43,6 @@
   <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d" style="display:none;"></div>
   <script src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
   <script>
-    const placeholders = [
-      {title:"The Long Game",desc:"Challenge your strategy skills in this epic turn-based game.",img:"https://static.itch.io/images/itchio-textless-black.svg"},
-      {title:"Guitar Metronome",desc:"Keep perfect time while practicing your guitar skills.",img:"https://static.itch.io/images/itchio-textless-black.svg"},
-      {title:"Coming Soon",desc:"Stay tuned for more games and tools coming soon!",img:"https://static.itch.io/images/itchio-textless-black.svg"}
-    ];
-
-    function generatePlaceholderCards() {
-      const grid = document.getElementById('games-grid');
-      placeholders.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<img src="${p.img}" alt="${p.title}" onerror="this.style.background='#2a2a2a';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.color='#666666';this.style.fontSize='14px';this.innerHTML='${p.title}'"><div class="card-content"><h3>${p.title}</h3><p>${p.desc}</p></div>`;
-        grid.appendChild(card);
-      });
-    }
-
     function updateVisitsDisplay() {
       const counterEl = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
       const visitsDisplay = document.getElementById('visits-display');
@@ -93,10 +75,7 @@
       setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      generatePlaceholderCards();
-      tryUpdateCounter();
-    });
+    document.addEventListener('DOMContentLoaded', () => tryUpdateCounter());
   </script>
 </body>
 </html>

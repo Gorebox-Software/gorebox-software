@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of Service - Gorebox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-header" onclick="window.location.href='index.html'">
+      <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
+      <h1>Gorebox</h1>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="social-link discord">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://x.com/Sarkicism" target="_blank" class="social-link x">
+        <i class="fa-solid fa-x"></i>
+      </a>
+    </div>
+
+    <div class="visits-counter">
+      <span class="counter-label">Visits</span>
+      <span id="visits-display">Loading...</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Terms of Service</h2>
+    <div class="legal-container">
+      <div class="legal-section">
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing and using Gorebox, you accept and agree to be bound by the terms and provision of this agreement.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>2. Use License</h3>
+        <p>Permission is granted to temporarily download one copy of the materials (information or software) on Gorebox for personal, non-commercial transitory viewing only.</p>
+        <p>This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+        <ul>
+          <li>modify or copy the materials</li>
+          <li>use the materials for any commercial purpose or for any public display</li>
+          <li>attempt to reverse engineer any software contained on Gorebox</li>
+          <li>remove any copyright or other proprietary notations from the materials</li>
+        </ul>
+      </div>
+
+      <div class="legal-section">
+        <h3>3. Disclaimer</h3>
+        <p>The materials on Gorebox are provided on an 'as is' basis. Gorebox makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>4. Limitations</h3>
+        <p>In no event shall Gorebox or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Gorebox, even if Gorebox or a Gorebox authorized representative has been notified orally or in writing of the possibility of such damage.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>5. Accuracy of Materials</h3>
+        <p>The materials appearing on Gorebox could include technical, typographical, or photographic errors. Gorebox does not warrant that any of the materials on its website are accurate, complete or current. Gorebox may make changes to the materials contained on its website at any time without notice.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>6. Links</h3>
+        <p>Gorebox has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by Gorebox of the site.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>7. Modifications</h3>
+        <p>Gorebox may revise these terms of service for its website at any time without notice. By using this website you are agreeing to be bound by the then current version of these Terms of Service.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>8. Governing Law</h3>
+        <p>These terms and conditions are governed by and construed in accordance with the laws and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+      </div>
+
+      <div class="legal-section">
+        <h3>Contact Information</h3>
+        <p>If you have any questions about these Terms of Service, please contact us through our <a href="contact.html" class="legal-link">contact page</a> or join our <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="legal-link">Discord server</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner">
+    [ Banner Ad Placement ]
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Home</a>
+      <span class="footer-separator">•</span>
+      <a href="grove.html" class="footer-link">Grove</a>
+      <span class="footer-separator">•</span>
+      <a href="contact.html" class="footer-link">Contact</a>
+    </div>
+  </div>
+
+  <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d" style="display:none;"></div>
+  <script src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
+  <script>
+    function updateVisitsDisplay() {
+      const counterEl = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
+      const visitsDisplay = document.getElementById('visits-display');
+      
+      if (counterEl?.innerHTML?.trim()) {
+        const imgMatch = counterEl.innerHTML.match(/<img[^>]*src="[^"]*counter\.php[^"]*"[^>]*>/);
+        if (imgMatch) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = imgMatch[0];
+          const img = tempDiv.querySelector('img');
+          if (img) {
+            const cleanImg = document.createElement('img');
+            cleanImg.src = img.src;
+            cleanImg.alt = 'Visit Counter';
+            cleanImg.style.border = 'none';
+            visitsDisplay.innerHTML = '';
+            visitsDisplay.appendChild(cleanImg);
+            visitsDisplay.style.animation = 'pulse 0.6s ease-in-out';
+            setTimeout(() => visitsDisplay.style.animation = '', 600);
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function tryUpdateCounter(attempts = 0) {
+      if (updateVisitsDisplay() || attempts >= 30) {
+        if (attempts >= 30) {
+          document.getElementById('visits-display').textContent = '0';
+          document.getElementById('visits-display').style.animation = 'pulse 0.6s ease-in-out';
+        }
+        return;
+      }
+      setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      tryUpdateCounter();
+      
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.style.opacity = '0';
+        navbar.style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+          navbar.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          navbar.style.opacity = '1';
+          navbar.style.transform = 'translateY(0)';
+        }, 100);
+      }
+      
+      const content = document.querySelector('.content');
+      if (content) {
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+          content.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0)';
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>

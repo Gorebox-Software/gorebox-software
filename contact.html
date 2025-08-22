@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact - Gorebox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-header" onclick="window.location.href='index.html'">
+      <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
+      <h1>Gorebox</h1>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="social-link discord">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://x.com/Sarkicism" target="_blank" class="social-link x">
+        <i class="fa-solid fa-x"></i>
+      </a>
+    </div>
+
+    <div class="visits-counter">
+      <span class="counter-label">Visits</span>
+      <span id="visits-display">Loading...</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Contact Us</h2>
+    <p>Get in touch with the Gorebox team! We'd love to hear from you.</p>
+    
+    <div class="contact-container">
+      <div class="contact-section">
+        <h3><i class="fab fa-discord"></i> Discord</h3>
+        <p>Join our Discord server for real-time chat, support, and community discussions.</p>
+        <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="contact-button discord">
+          <i class="fab fa-discord"></i>
+          Join Discord Server
+        </a>
+      </div>
+
+      <div class="contact-section">
+        <h3><i class="fa-solid fa-x"></i> X (Twitter)</h3>
+        <p>Follow us on X for updates, announcements, and gaming content.</p>
+        <a href="https://x.com/Sarkicism" target="_blank" class="contact-button x">
+          <i class="fa-solid fa-x"></i>
+          Follow on X
+        </a>
+      </div>
+
+      <div class="contact-section">
+        <h3><i class="fas fa-gamepad"></i> Game Support</h3>
+        <p>Need help with one of our games? Check out the game-specific channels in our Discord.</p>
+        <div class="game-links">
+          <a href="grove.html" class="game-link">
+            <img src="https://img.itch.zone/aW1nLzIwNzYxNzMzLnBuZw==/315x250%23c/FCNscO.png" alt="Grove">
+            <span>Grove Support</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <h3><i class="fas fa-info-circle"></i> General Inquiries</h3>
+        <p>For business inquiries, partnerships, or general questions, please reach out through Discord or X.</p>
+        <p class="contact-note">We typically respond within 24-48 hours during business days.</p>
+      </div>
+
+      <div class="contact-section">
+        <h3><i class="fas fa-shield-alt"></i> Report Issues</h3>
+        <p>Found a bug or have a security concern? Please report it through our Discord server for the fastest response.</p>
+        <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="contact-button secondary">
+          <i class="fas fa-bug"></i>
+          Report Bug
+        </a>
+      </div>
+    </div>
+
+    <div class="legal-links">
+      <p>Also check out our <a href="tos.html" class="legal-link">Terms of Service</a> for more information.</p>
+    </div>
+  </div>
+
+  <div class="ad-banner">
+    [ Banner Ad Placement ]
+    <div class="footer-links">
+      <a href="index.html" class="footer-link">Home</a>
+      <span class="footer-separator">•</span>
+      <a href="grove.html" class="footer-link">Grove</a>
+      <span class="footer-separator">•</span>
+      <a href="tos.html" class="footer-link">Terms of Service</a>
+    </div>
+  </div>
+
+  <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d" style="display:none;"></div>
+  <script src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
+  <script>
+    function updateVisitsDisplay() {
+      const counterEl = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
+      const visitsDisplay = document.getElementById('visits-display');
+      
+      if (counterEl?.innerHTML?.trim()) {
+        const imgMatch = counterEl.innerHTML.match(/<img[^>]*src="[^"]*counter\.php[^"]*"[^>]*>/);
+        if (imgMatch) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = imgMatch[0];
+          const img = tempDiv.querySelector('img');
+          if (img) {
+            const cleanImg = document.createElement('img');
+            cleanImg.src = img.src;
+            cleanImg.alt = 'Visit Counter';
+            cleanImg.style.border = 'none';
+            visitsDisplay.innerHTML = '';
+            visitsDisplay.appendChild(cleanImg);
+            visitsDisplay.style.animation = 'pulse 0.6s ease-in-out';
+            setTimeout(() => visitsDisplay.style.animation = '', 600);
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function tryUpdateCounter(attempts = 0) {
+      if (updateVisitsDisplay() || attempts >= 30) {
+        if (attempts >= 30) {
+          document.getElementById('visits-display').textContent = '0';
+          document.getElementById('visits-display').style.animation = 'pulse 0.6s ease-in-out';
+        }
+        return;
+      }
+      setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      tryUpdateCounter();
+      
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        navbar.style.opacity = '0';
+        navbar.style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+          navbar.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          navbar.style.opacity = '1';
+          navbar.style.transform = 'translateY(0)';
+        }, 100);
+      }
+      
+      const content = document.querySelector('.content');
+      if (content) {
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+          content.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0)';
+        }, 300);
+      }
+    });
+  </script>
+</body>
+</html>

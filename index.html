@@ -64,6 +64,15 @@
       color: #fff;
     }
 
+    /* Counter */
+    .counter {
+      text-align: center;
+      padding: 10px;
+      background: #181818;
+      font-size: 1rem;
+      color: #aaa;
+    }
+
     /* Footer Ad Banner */
     .ad-banner {
       text-align: center;
@@ -101,9 +110,23 @@
     </div>
   </div>
 
+  <!-- Visit Counter -->
+  <div class="counter">
+    Visits: <span id="counter">Loading...</span>
+  </div>
+
   <!-- Footer Banner -->
   <div class="ad-banner">
     [ Banner Ad Placement ]
   </div>
+
+  <!-- Counter Script -->
+  <script>
+    fetch('https://api.countapi.xyz/hit/gorebox-site/visits')
+      .then(res => res.json())
+      .then(res => {
+        document.getElementById('counter').innerText = res.value;
+      });
+  </script>
 </body>
 </html>

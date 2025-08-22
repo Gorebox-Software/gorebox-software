@@ -33,6 +33,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Fixed height instead of min-height */
+  min-height:100vh;
   /*overflow: hidden; /* Prevent main window scrolling */
 }
 
@@ -258,10 +259,10 @@ body::before {
 }
 
 .grid {
-  flex: 1 1 0;          /* fill remaining space */
+  flex: 1 1 1;          /* fill remaining space */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem;
   width: 100%;
   overflow-y: auto;     /* scroll only this container */
@@ -306,7 +307,9 @@ body::before {
 
   /* ✅ Let height grow with content */
   min-height: 280px;  /* or whatever minimum size you want */
-  height: auto;       /* allow cards to expand naturally */
+  max-height:280px;
+  min-width: 280px;  /* or whatever minimum size you want */
+  max-width:280px;
 }
 
 .card::before {
@@ -464,6 +467,7 @@ body::before {
   border-top: 1px solid var(--border);
   color: var(--text-secondary);
   backdrop-filter: blur(20px);
+  margin-top:auto;
   position: relative;
   box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
@@ -805,10 +809,10 @@ body::before {
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(5px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
   }
 }
 
@@ -853,6 +857,7 @@ body::before {
     margin-left: auto;
     padding: 6px 12px;
     font-size: 0.7rem;
+
   }
   
   .visits-counter .counter-label {
@@ -939,6 +944,7 @@ body::before {
   
   .navbar {
     padding: 0.6rem 1.2rem;
+    padding: 0;
   }
   
   .navbar img {
@@ -964,11 +970,7 @@ body::before {
     padding: 4px 8px;
     font-size: 0.65rem;
   }
-  
-  .card {
-    aspect-ratio: 1 / 1;
-  }
-  
+
   .card-content {
     padding: 1rem 0.8rem;
   }
@@ -1039,6 +1041,7 @@ body::before {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
+
   .navbar-header:hover {
     transform: none;
     box-shadow: none;

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grove - Gorebox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #111;
+      color: white;
+    }
+
+    .navbar-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .navbar-header img {
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+
+    .social-links a {
+      color: white;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      position: relative; /* allows positioning inside */
+      min-height: 500px;
+    }
+
+    .left-side {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    #Attackable {
+      cursor: pointer;
+      background-color: darkred;
+      width: 96px;
+      height: 96px;
+      line-height: 96px;
+      border-radius: 50%;
+      margin: 20px auto;
+      font-weight: bold;
+    }
+
+    .left-side img {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .right-side {
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .upgrade-box, .shop-box {
+      background: #222;
+      padding: 10px;
+      border: 2px solid #444;
+      margin-bottom: 20px;
+    }
+
+    .upgrade-box h3, .shop-box h3 {
+      text-align: center;
+    }
+
+    .upgrade-box button, .shop-box button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 8px;
+      background: #333;
+      color: white;
+      border: 1px solid #555;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .upgrade-box button:hover, .shop-box button:hover {
+      background: #444;
+    }
+
+    .ad-banner {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+    }
+
+    .footer-links {
+      margin-top: 10px;
+    }
+
+    .footer-link {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-separator {
+      margin: 0 5px;
+      color: #555;
+    }
+
+    /* Avatar + Weapon window */
+    .avatar-weapon {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: #111;
+      border: 2px solid #444;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .avatar-box img, .weapon-box img {
+      width: 64px;
+      height: 64px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .weapon-box {
+      margin-left: 15px;
+      text-align: center;
+    }
+
+    .weapon-box span {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-header" onclick="window.location.href='index.html'">
+      <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
+      <h1>Gorebox</h1>
+    </div>
+    
+    <div class="social-links">
+      <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="social-link discord">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://x.com/Sarkicism" target="_blank" class="social-link x">
+        <i class="fa-solid fa-x"></i>
+      </a>
+    </div>
+
+    <div class="visits-counter">
+      <span class="counter-label">Visits</span>
+      <span id="visits-display">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Game Area -->
+  <div class="content">
+    <!-- Left Side -->
+    <div class="left-side">
+      <h2>Willpower: <span id="Will">0</span> <span>+<span id="WillPerSecond">0</span><span>/s</span></span></h2>
+      <h2>Willpower: </h2>
+
+      <div id="Attackable" onclick="attack()"><img src="fleshbehemoth.png" alt="Enemy"></div>
+    in progress, check back later 🔨
+
+
+
+
+      <!-- Avatar + Weapon -->
+      <div class="avatar-weapon">
+        <div class="weapon-box">
+          <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Avatar">
+          <span>Broken</span>
+
+        </div>
+        <div class="weapon-box">
+          <img src="warpscythe.png" alt="Current Weapon">
+          <span>Warp Scythe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-side">
+      <div class="upgrade-box">
+        <h3>Upgrades</h3>
+        <button onclick="buyUpgrade('reality')">Upgrade Reality</button>
+        <button onclick="buyUpgrade('enemy')">Upgrade Enemy</button>
+        <button onclick="buyUpgrade('weapon')">Upgrade Weapon</button>
+        <button onclick="buyUpgrade('form')">Upgrade Form</button>
+      </div>
+
+      <div class="shop-box">
+        <h3>Shop</h3>
+        <button onclick="buyItem('sarkites')">Buy Sarkites</button>
+        <button onclick="buyItem('mechanites')">Buy Mechanites</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer / Ads -->
+  <div class="ad-banner">
+    [ Banner Ad Placement ]
+    <div class="footer-links">
+      <a href="tos.html" class="footer-link">Terms of Service</a>
+      <span class="footer-separator">•</span>
+      <a href="contact.html" class="footer-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- Visit Counter -->
+  <div id="sfcl2qmnwy1hupkrysfakk8nhracsywsj8d" style="display:none;"></div>
+  <script src="https://counter1.optistats.ovh/private/counter.js?c=l2qmnwy1hupkrysfakk8nhracsywsj8d&down=async" async></script>
+
+  <script>
+    // Will counter
+
+
+
+    var TotalWill = 0;
+    var willcounter = document.getElementById("Will");
+    var wpscounter = document.getElementById("WillPerSecond");
+
+    function attack() {
+      TotalWill += 1;
+      willcounter.innerText = TotalWill.toString().split(".")[0];
+    }
+
+
+  var wps = 0.1;
+
+  var WillRewarder = setInterval(function () {
+    TotalWill+=wps/10;
+    wpscounter.innerHTML = wps.toFixed(2).toString();
+    willcounter.innerHTML = TotalWill.toString().split(".")[0]
+  }, 100);
+
+    // Stub functions for upgrades & shop
+    function buyUpgrade(type) {
+      alert("Bought upgrade: " + type);
+    }
+
+    function buyItem(item) {
+      alert("Bought item: " + item);
+    }
+
+    // Visit counter script
+    function updateVisitsDisplay() {
+      const counterEl = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
+      const visitsDisplay = document.getElementById('visits-display');
+      
+      if (counterEl?.innerHTML?.trim()) {
+        const imgMatch = counterEl.innerHTML.match(/<img[^>]*src="[^"]*counter\.php[^"]*"[^>]*>/);
+        if (imgMatch) {
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = imgMatch[0];
+          const img = tempDiv.querySelector('img');
+          if (img) {
+            const cleanImg = document.createElement('img');
+            cleanImg.src = img.src;
+            cleanImg.alt = 'Visit Counter';
+            cleanImg.style.border = 'none';
+            visitsDisplay.innerHTML = '';
+            visitsDisplay.appendChild(cleanImg);
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+
+    function tryUpdateCounter(attempts = 0) {
+      if (updateVisitsDisplay() || attempts >= 30) {
+        if (attempts >= 30) document.getElementById('visits-display').textContent = '0';
+        return;
+      }
+      setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => tryUpdateCounter());
+  </script>
+</body>
+</html>

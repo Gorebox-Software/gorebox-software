@@ -1,0 +1,50 @@
+{
+  "basic": [
+    {"en": ["hello", "A greeting when meeting someone"], "es": "hola"},
+    {"en": ["goodbye", "A word used when leaving someone"], "es": "adiós"},
+    {"en": ["thank", "To express gratitude"], "es": "gracias"},
+    {"en": ["please", "Used to politely request something"], "es": "por favor"},
+    {"en": ["sorry", "Used to apologize"], "es": "lo siento"},
+    {"en": ["yes", "An affirmative response"], "es": "sí"},
+    {"en": ["no", "A negative response"], "es": "no"},
+    {"en": ["morning", "The early part of the day"], "es": "mañana"},
+    {"en": ["night", "The time of day when it is dark"], "es": "noche"},
+    {"en": ["excuse", "Used to politely get attention or apologize"], "es": "disculpe"}
+  ],
+  "easy": [
+    {"en": ["how", "Used to ask about manner or condition"], "es": "cómo"},
+    {"en": ["name", "A word used to identify a person"], "es": "nombre"},
+    {"en": ["love", "A strong feeling of affection"], "es": "amor"},
+    {"en": ["happy", "Feeling pleased or joyful"], "es": "feliz"},
+    {"en": ["birthday", "The anniversary of someone's birth"], "es": "cumpleaños"},
+    {"en": ["help", "To assist someone in need"], "es": "ayuda"},
+    {"en": ["bathroom", "A room for personal hygiene"], "es": "baño"},
+    {"en": ["friend", "A person you like and trust"], "es": "amigo"},
+    {"en": ["yes", "An affirmative answer"], "es": "sí"},
+    {"en": ["no", "A negative answer"], "es": "no"}
+  ],
+  "medium": [
+    {"en": ["luck", "Success or failure brought by chance"], "es": "suerte"},
+    {"en": ["later", "At a time after the present"], "es": "después"},
+    {"en": ["time", "The measured or measurable period during which events occur"], "es": "hora"},
+    {"en": ["hungry", "Feeling a need for food"], "es": "hambriento"},
+    {"en": ["thirsty", "Feeling a need for drink"], "es": "sediento"},
+    {"en": ["tired", "Feeling a need to rest"], "es": "cansado"},
+    {"en": ["origin", "The place where something begins or comes from"], "es": "origen"},
+    {"en": ["what", "Used to ask for information about something"], "es": "qué"},
+    {"en": ["this", "Referring to a specific thing nearby"], "es": "esto"},
+    {"en": ["cost", "The price of something"], "es": "costo"}
+  ],
+  "hard": [
+    {"en": ["doctor", "A person trained to treat illnesses"], "es": "médico"},
+    {"en": ["police", "Officers responsible for maintaining law and order"], "es": "policía"},
+    {"en": ["like", "To enjoy or approve of something"], "es": "gustar"},
+    {"en": ["dislike", "To not enjoy or approve of something"], "es": "no gustar"},
+    {"en": ["color", "The visual property of things from light reflection"], "es": "color"},
+    {"en": ["happy", "Feeling or showing pleasure"], "es": "feliz"},
+    {"en": ["sad", "Feeling sorrow or unhappiness"], "es": "triste"},
+    {"en": ["angry", "Feeling strong annoyance or displeasure"], "es": "enojado"},
+    {"en": ["scared", "Feeling afraid of something"], "es": "asustado"},
+    {"en": ["fear", "An unpleasant emotion caused by danger or threat"], "es": "temor"}
+  ]
+}

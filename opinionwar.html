@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grove - Gorebox</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: #111;
+      color: white;
+    }
+
+    .navbar-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .navbar-header img {
+      margin-right: 10px;
+      border-radius: 5px;
+    }
+
+    .social-links a {
+      color: white;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+
+    .content {
+      padding: 40px 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Voting Section */
+    .vote-title {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .vote-subtitle {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #ccc;
+    }
+
+    .vote-options {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 30px;
+    }
+
+    .vote-option {
+      background: #222;
+      padding: 15px 25px;
+      border: 2px solid #444;
+      border-radius: 12px;
+      width: 45%;
+      color: #eee;
+      font-weight: bold;
+    }
+
+    .progress-bar-container {
+      background: #333;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 30px;
+      margin-bottom: 10px;
+      display: flex;
+    }
+
+    .progress-bar-peanut {
+      background: #eab308;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+    }
+
+    .progress-bar-lint {
+      background: #a855f7;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .timer {
+      font-size: 16px;
+      margin-top: 20px;
+      color: #ccc;
+    }
+
+    .next-vote {
+      font-size: 14px;
+      margin-top: 10px;
+      font-style: italic;
+      color: #888;
+    }
+
+    /* Last Opinions Section */
+    .last-opinions {
+      background: #111;
+      border: 2px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .last-opinions h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .opinion-entry {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 10px;
+    }
+
+    .opinion-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+      color: #ccc;
+    }
+
+    .opinion-topic {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .opinion-bar-container {
+      background: #333;
+      border-radius: 10px;
+      height: 20px;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .opinion-bar-peanut {
+      background: #eab308;
+      width: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .opinion-bar-lint {
+      background: #a855f7;
+      width: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    /* Scoreboard */
+    .scoreboard {
+      background: #111;
+      border: 2px solid #444;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .scoreboard h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .scoreboard-section {
+      margin-bottom: 20px;
+    }
+
+    .scoreboard-section h4 {
+      margin-bottom: 10px;
+      color: #ccc;
+    }
+
+    .scoreboard ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .scoreboard li {
+      padding: 6px 10px;
+      background: #222;
+      border: 1px solid #444;
+      border-radius: 8px;
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .ad-banner {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: white;
+      margin-top: 40px;
+    }
+
+    .footer-links {
+      margin-top: 10px;
+    }
+
+    .footer-link {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer-separator {
+      margin: 0 5px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-header" onclick="window.location.href='index.html'">
+      <img src="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg" alt="Logo">
+      <h1>Gorebox</h1>
+    </div>
+
+    <div class="social-links">
+      <a href="https://discord.gg/QHKWDHhHWw" target="_blank" class="social-link discord">
+        <i class="fab fa-discord"></i>
+      </a>
+      <a href="https://x.com/Sarkicism" target="_blank" class="social-link x">
+        <i class="fa-solid fa-x"></i>
+      </a>
+    </div>
+
+    <div class="visits-counter">
+      <span class="counter-label">Visits</span>
+      <span id="visits-display">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Cast Your Vote Mockup -->
+  <div class="content">
+    <div class="vote-title">Cast Your Vote!</div>
+    <div class="vote-subtitle">Peanut Butter or Eating Carpet Lint?</div>
+
+    <div class="vote-options">
+      <div class="vote-option">Peanut Butter</div>
+      <div class="vote-option">Carpet Lint</div>
+    </div>
+
+    <div class="progress-bar-container">
+      <div class="progress-bar-peanut">50%</div>
+      <div class="progress-bar-lint">50%</div>
+    </div>
+
+    <div class="timer">Voting ends in 30s</div>
+    <div class="next-vote">Next vote starts in 10s...</div>
+
+    <!-- Last 5 Opinions -->
+    <div class="last-opinions">
+      <h3>Last 5 Opinions</h3>
+
+      <div class="opinion-entry">
+        <div class="opinion-header">
+          <span>Round #324</span>
+          <span>2025-08-23</span>
+        </div>
+        <div class="opinion-topic">Own a Rabbit vs Own a Rabbi</div>
+        <div class="opinion-bar-container">
+          <div class="opinion-bar-peanut">60%</div>
+          <div class="opinion-bar-lint">40%</div>
+        </div>
+      </div>
+
+      <div class="opinion-entry">
+        <div class="opinion-header">
+          <span>Round #323</span>
+          <span>2025-08-22</span>
+        </div>
+        <div class="opinion-topic">Own a rusted hammer vs Own an empty toolbox</div>
+        <div class="opinion-bar-container">
+          <div class="opinion-bar-peanut">45%</div>
+          <div class="opinion-bar-lint">55%</div>
+        </div>
+      </div>
+
+      <div class="opinion-entry">
+        <div class="opinion-header">
+          <span>Round #322</span>
+          <span>2025-08-21</span>
+        </div>
+        <div class="opinion-topic">Clothes for skin vs Skin for Clothes</div>
+        <div class="opinion-bar-container">
+          <div class="opinion-bar-peanut">70%</div>
+          <div class="opinion-bar-lint">30%</div>
+        </div>
+      </div>
+
+      <div class="opinion-entry">
+        <div class="opinion-header">
+          <span>Round #321</span>
+          <span>2025-08-20</span>
+        </div>
+        <div class="opinion-topic">Eat Glass vs Eat Battery</div>
+        <div class="opinion-bar-container">
+          <div class="opinion-bar-peanut">55%</div>
+          <div class="opinion-bar-lint">45%</div>
+        </div>
+      </div>
+
+      <div class="opinion-entry">
+        <div class="opinion-header">
+          <span>Round #320</span>
+          <span>2025-08-19</span>
+        </div>
+        <div class="opinion-topic">Live in vietnam swamp vs Live inside american dry walling</div>
+        <div class="opinion-bar-container">
+          <div class="opinion-bar-peanut">40%</div>
+          <div class="opinion-bar-lint">60%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <h3>Scoreboard</h3>
+
+      <div class="scoreboard-section">
+        <h4>Top Voters</h4>
+        <ul>
+          <li><span>PlayerOne</span> <span>120 pts</span></li>
+          <li><span>GoreFan99</span> <span>100 pts</span></li>
+          <li><span>Linter</span> <span>85 pts</span></li>
+          <li><span>PeanutKing</span> <span>80 pts</span></li>
+          <li><span>RandomUser</span> <span>70 pts</span></li>
+        </ul>
+      </div>
+
+      <div class="scoreboard-section">
+        <h4>Your Score</h4>
+        <ul>
+          <li><span>Total Points</span> <span>75 pts</span></li>
+          <li><span>Correct Votes</span> <span>12</span></li>
+          <li><span>Wrong Votes</span> <span>3</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="ad-banner">
+    [ Banner Ad Placement ]
+    <div class="footer-links">
+      <a href="tos.html" class="footer-link">Terms of Service</a>
+      <span class="footer-separator">•</span>
+      <a href="contact.html" class="footer-link">Contact</a>
+    </div>
+  </div>
+</body>
+</html>

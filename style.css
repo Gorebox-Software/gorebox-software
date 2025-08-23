@@ -271,6 +271,7 @@ body::before {
 
   scrollbar-width: thin;
   scrollbar-color: var(--primary) var(--card-bg);
+  justify-items: center;
 }
 /* Custom scrollbar styling */
 .grid::-webkit-scrollbar {

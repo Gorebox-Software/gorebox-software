@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="https://img.itch.zone/aW1nLzE3NzMzMzEyLmpwZw==/35x35%23/vcKQW0.jpg">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Metronome - Gorebox</title>
@@ -169,8 +168,8 @@
       </div>
       <div class="controls">
         <label for="bpmInput">BPM</label>
-        <input type="number" id="bpmInput" min="0" max="360" value="120">
-        <input type="range" id="bpmSlider" min="0" max="360" value="120">
+        <input type="number" id="bpmInput" min="0" max="240" value="60">
+        <input type="range" id="bpmSlider" min="0" max="240" value="60">
       </div>
       <div class="sound-select">
         <label for="sound">Sound</label>
@@ -178,6 +177,8 @@
           <option value="metronome">Metronome</option>
           <option value="beep">Beep</option>
           <option value="tick">Tick</option>
+          <option value="wood">Woodblock</option>
+          <option value="hat">Hi-hat</option>
         </select>
       </div>
       <div class="volume-control">
@@ -204,138 +205,107 @@
 
   <!-- Metronome Logic -->
   <script>
-    let interval, progressInterval;
-    const light = document.getElementById("light");
-    const progress = document.getElementById("progress");
-    const bpmInput = document.getElementById("bpmInput");
-    const bpmSlider = document.getElementById("bpmSlider");
-    const toggleBtn = document.getElementById("toggleBtn");
-    const soundSelect = document.getElementById("sound");
-    const volumeControl = document.getElementById("volume");
-    let isRunning = false;
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+const light = document.getElementById("light");
+const progress = document.getElementById("progress");
+const bpmInput = document.getElementById("bpmInput");
+const bpmSlider = document.getElementById("bpmSlider");
+const toggleBtn = document.getElementById("toggleBtn");
+const soundSelect = document.getElementById("sound");
+const volumeControl = document.getElementById("volume");
 
+let isRunning = false;
+let lastBeatTime = 0;
+let loopId;
 
+const metronomeAudio = new Audio("metronome.mp3");
+metronomeAudio.preload = "auto";
 
-    // Play sound
-    function playSound(type) {
-
-  if (type === "metronome") {
-    const audio = new Audio("metronome.mp3"); // create a new instance every tick
-    audio.volume = Math.min(volumeControl.value * 2, 1); // ensure volume <= 1
+function playSound(type) {
+  if(type === "metronome") {
+    const audio = metronomeAudio.cloneNode();
+    audio.volume = Math.min(volumeControl.value, 1);
     audio.play().catch(err => console.error(err));
     return;
   }
 
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  osc.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  gainNode.gain.value = volumeControl.value;
 
-      const osc = ctx.createOscillator();
-      const gainNode = ctx.createGain();
-      osc.connect(gainNode);
-      gainNode.connect(ctx.destination);
-      gainNode.gain.value = volumeControl.value;
+  switch(type) {
+    case "beep": osc.type = "sine"; osc.frequency.value = 400; break;
+    case "tick": osc.type = "triangle"; osc.frequency.value = 660; break;
+    case "wood": osc.type = "triangle"; osc.frequency.value = 350; break;
+    case "hat": osc.type = "sawtooth"; osc.frequency.value = 1500; break;
+  }
 
-      switch(type) {
-        case "beep": osc.type = "sine"; osc.frequency.value = 200; break;
-        case "metronome": osc.type = "square"; osc.frequency.value = 100; break;
-        case "tick": osc.type = "triangle"; osc.frequency.value = 660; break;
-      }
+  osc.start();
+  osc.stop(ctx.currentTime + 0.08);
+}
 
-      osc.start();
-      osc.stop(ctx.currentTime + 0.1);
-    }
+function beat() {
+  if(bpmInput.value <= 0) return;
+  playSound(soundSelect.value);
 
-    // Beat
-    function beat() {
-      playSound(soundSelect.value);
-      light.classList.add("active");
-      setTimeout(() => light.classList.remove("active"), 100);
+  // Flash light
+  light.classList.add("active");
+  setTimeout(() => light.classList.remove("active"), 100);
 
-      // Reset progress bar
-      progress.style.transition = "none";
-      progress.style.width = "0%";
-      setTimeout(() => {
-        progress.style.transition = `width ${60000 / bpmInput.value}ms linear`;
-        progress.style.width = "100%";
-      }, 20);
-    }
+  // Animate progress bar
+  progress.style.transition = "none";
+  progress.style.width = "0%";
+  setTimeout(() => {
+    progress.style.transition = `width ${60000 / bpmInput.value}ms linear`;
+    progress.style.width = "100%";
+  }, 10);
 
-    // Start Metronome
-    function startMetronome() {
-      if (isRunning) return;
-      isRunning = true;
-      toggleBtn.textContent = "Stop";
-      toggleBtn.classList.remove("start");
-      toggleBtn.classList.add("stop");
-      const intervalTime = 60000 / bpmInput.value;
-      beat();
-      interval = setInterval(beat, intervalTime);
-    }
+  lastBeatTime = performance.now();
+}
 
-    // Stop Metronome
-    function stopMetronome() {
-      isRunning = false;
-      toggleBtn.textContent = "Start";
-      toggleBtn.classList.remove("stop");
-      toggleBtn.classList.add("start");
-      clearInterval(interval);
-      progress.style.width = "0%";
-    }
+function metronomeLoop() {
+  if(!isRunning) return;
+  const now = performance.now();
+  const interval = 60000 / bpmInput.value;
 
-    // Toggle Button
-    toggleBtn.addEventListener("click", () => {
-      if (isRunning) stopMetronome();
-      else startMetronome();
-    });
+  if(now - lastBeatTime >= interval) {
+    beat();
+  }
 
-    // Sync input & slider
-    bpmInput.addEventListener("input", () => {
-      bpmSlider.value = bpmInput.value;
-      if (isRunning) {
-        stopMetronome();
-        startMetronome();
-      }
-    });
+  loopId = requestAnimationFrame(metronomeLoop);
+}
 
-    bpmSlider.addEventListener("input", () => {
-      bpmInput.value = bpmSlider.value;
-      if (isRunning) {
-        stopMetronome();
-        startMetronome();
-      }
-    });
+function startMetronome() {
+  if(isRunning) return;
+  isRunning = true;
+  toggleBtn.textContent = "Stop";
+  toggleBtn.classList.replace("start","stop");
+  lastBeatTime = performance.now() - 10; // trigger immediate first beat
+  metronomeLoop();
+}
 
-    // Counter init
-    function updateVisitsDisplay() {
-      const counterEl = document.getElementById('sfcl2qmnwy1hupkrysfakk8nhracsywsj8d');
-      const visitsDisplay = document.getElementById('visits-display');
-      if (counterEl?.innerHTML?.trim()) {
-        const imgMatch = counterEl.innerHTML.match(/<img[^>]*src="[^"]*counter\.php[^"]*"[^>]*>/);
-        if (imgMatch) {
-          const tempDiv = document.createElement('div');
-          tempDiv.innerHTML = imgMatch[0];
-          const img = tempDiv.querySelector('img');
-          if (img) {
-            const cleanImg = document.createElement('img');
-            cleanImg.src = img.src;
-            cleanImg.alt = 'Visit Counter';
-            cleanImg.style.border = 'none';
-            visitsDisplay.innerHTML = '';
-            visitsDisplay.appendChild(cleanImg);
-            return true;
-          }
-        }
-      }
-      return false;
-    }
+function stopMetronome() {
+  isRunning = false;
+  toggleBtn.textContent = "Start";
+  toggleBtn.classList.replace("stop","start");
+  progress.style.width = "0%";
+  if(loopId) cancelAnimationFrame(loopId);
+}
 
-    function tryUpdateCounter(attempts = 0) {
-      if (updateVisitsDisplay() || attempts >= 30) {
-        if (attempts >= 30) document.getElementById('visits-display').textContent = '0';
-        return;
-      }
-      setTimeout(() => tryUpdateCounter(attempts + 1), 1000);
-    }
-    document.addEventListener('DOMContentLoaded', () => tryUpdateCounter());
-  </script>
+toggleBtn.addEventListener("click", () => {
+  isRunning ? stopMetronome() : startMetronome();
+});
+
+// Sync inputs
+bpmInput.addEventListener("input", () => {
+  bpmSlider.value = bpmInput.value;
+});
+bpmSlider.addEventListener("input", () => {
+  bpmInput.value = bpmSlider.value;
+});
+</script>
+
 </body>
 </html>
